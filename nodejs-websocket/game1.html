@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .box{text-align: center;margin-top: 200px;}
+    #text{text-align: center;}
+    .value{width: 200px;height: 200px;border: 1px solid salmon;text-align: center;line-height: 200px;display: inline-block;}
+  </style>
+</head>
+<body>
+  <div id="text">正在连接...</div>
+  <div class="box">
+    <div class="value" id="value1">张三张三</div>
+    <div class="value" id="value2">李四李四</div>
+    <div class="value" id="value3">王五王五</div>
+  </div>
+
+  <script>
+    var aText = document.getElementById('text');
+    if(window.WebSocket){
+      var ws = new WebSocket('ws://127.0.0.1:8001');
+      ws.onopen = function (e) {
+        console.log('连接服务器成功');
+        ws.send("game1");
+      }
+      ws.onclose = function (e) {
+        console.log("服务器关闭");
+      }
+      ws.onerror = function (e) {
+        console.log("连接出错");
+      }
+
+      ws.onmessage = function (e) {
+        aText.innerHTML = "连接成功"
+        document.querySelector('.box').onclick = function (e) {
+          var time = new Date();
+          ws.send(time + "game1点击了“" + e.target.innerHTML + "”")
+        }
+      }
+    }
+  </script>
+</body>
+</html>
