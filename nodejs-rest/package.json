@@ -1,0 +1,17 @@
+{
+    "name": "nodejs-reat",
+    "version": "1.0.0",
+    "description": "nodejs-reat",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js"
+    },
+    "author": "imizao",
+    "dependencies": {
+        "koa-router": "7.4.0",
+        "koa": "^2.3.0",
+        "koa-bodyparser": "^4.2.0",
+        "koa-views": "6.1.4",
+        "ejs": "^2.6.1"
+    }
+}
