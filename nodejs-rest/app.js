@@ -10,6 +10,7 @@ const app = new Koa();
 app.use(bodyParser());
 
 app.use(constroller());
+
 app.use(views(path.join(__dirname, './'), {
   extension: 'ejs'
 }))
