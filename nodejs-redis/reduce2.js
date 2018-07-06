@@ -6,7 +6,6 @@ var reducers = {
     return state.yens += item.price * 1;
   }
 };
-
 var manageReducers = function (reducers) {
   return function (state, item) {
     return Object.keys(reducers).reduce(

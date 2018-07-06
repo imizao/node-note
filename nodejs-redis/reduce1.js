@@ -7,4 +7,4 @@ var reducer = function (sumSoFar, item) {
 
 var total = items.reduce(reducer, {sum:0});
 
-console.log(total.sum);
+console.log(total);
