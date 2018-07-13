@@ -1,27 +1,22 @@
-var express = require('express');
-var app = express();
-var router = express.Router();
+var koa = require('koa');
 var request = require('request');
+var app = new koa();
 
-app.get('/', function (req,res,next) {
-  res.send("hello world");
+var data;
+app.use(async (ctx, next) => {
+  await next();
+
+  if (data) {
+    ctx.response.type = 'text/html';
+    ctx.response.body = data;
+  }
+}) 
+request('https://cnodejs.org/api/v1/user/imizao', function (error, response, body) {
+  if (!error && response.statusCode == 200) {
+    data = JSON.parse(body).data;
+    // console.log(data);
+  }
 })
 
-app.get('/getapi', function (req, res, next) {
-  var e = request({
-    url: 'https://cnodejs.org/api/v1/topics',
-    methods: 'GET',
-    headers: {'Content-Type': 'text/json'}
-  }, function (error, reaponse, body) {
-    if(!error && reaponse.statusCode == 200) {
-      res.render('task', {'data': JSON.parse(body)})
-    }
-  });
-})
-var server = app.listen(3000, function () {
-  var host = server.address().address;
-  var port = server.address().port;
-  console.log('Example app listening at http://%s:%s', host, port);
-})
-
-// module.exports = router;
+app.listen(3000);
+console.log('app started at port 3000...');
