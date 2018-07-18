@@ -20,13 +20,17 @@ var data;
 // }) 
 
 app.use(router.get('/index', async (ctx, next) => {
-  fs.readFile('data.json', 'utf8', function (err, data){
-    if(err) {console.log(err)} 
-    let adata = data;
-  })
-  await ctx.render('index', {
-    data: adata
-  })
+  var aData = (function () {
+      fs.readFile('data.json', 'utf8', function (err, data){
+      if(err) {console.log(err)} 
+      aData = data;
+    })
+    return aData;
+  })();
+  // await ctx.render('index', {
+  //   data: aData
+  // })
+  console.log(aData);
   
 }).routes())
 app.use(views(path.join(__dirname, './views'), {
