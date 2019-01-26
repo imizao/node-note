@@ -11,7 +11,7 @@ for (let i = 0; i < aJson.length; i++) {
   // console.log(aJson[i])
   const A = `./${fileName}/${aJson[i].firstname}` ;
   const B = `./${fileName}/${aJson[i].lastname}`;
-  fs.rename(B, A, err => {
+  fs.rename(A, B, err => {
     if (err) throw err;
     console.log('成功了');
   })
